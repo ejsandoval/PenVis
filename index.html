@@ -4,7 +4,7 @@
   <script src="dist/dimple.v2.1.0.js"></script>
   <script type="text/javascript">
     var svg = dimple.newSvg("#chartContainer", 590, 400);
-    var dsv = d3.dsv("|", "text/plain");
+    var dsv = d3.dsv(";", "text/plain");
     d3.dsv("data/movies.csv", function (data) {
         console.table(data);
         var myChart = new dimple.chart(svg, data);
