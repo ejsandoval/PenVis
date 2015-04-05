@@ -5,7 +5,8 @@
   <script type="text/javascript">
     var svg = dimple.newSvg("#chartContainer", 590, 400);
       d3.tsv("data/movies.csv", function (data) {
-        var myChart = new dimple.chart(svg, data);
+        var csv = d3.csv.parse(data);
+        var myChart = new dimple.chart(svg, csv);
         myChart.setBounds(60000000, 30000000, 500, 330)
         myChart.addMeasureAxis("x", "Worldwide Gross");
         myChart.addMeasureAxis("y", "Budget");
