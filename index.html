@@ -12,7 +12,8 @@
         myChart.setBounds(60, 30, 500, 330)
         myChart.addMeasureAxis("x", "Worldwide Gross");
         myChart.addMeasureAxis("y", "Budget");
-        myChart.addSeries("Opening Weekend", dimple.plot.bubble);
+        myChart.addMeasureAxis("z", "Opening Weekend");
+        //myChart.addSeries("Opening Weekend", dimple.plot.bubble);
         myChart.addLegend(200, 10, 360, 20, "right");
         myChart.draw();
       });
