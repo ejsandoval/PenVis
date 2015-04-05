@@ -6,7 +6,7 @@
     var svg = dimple.newSvg("#chartContainer", 590, 400);
       d3.tsv("data/movies.csv", function (data) {
         var myChart = new dimple.chart(svg, data);
-        myChart.setBounds(60, 30, 500, 330)
+        myChart.setBounds(60000000, 30000000, 500, 330)
         myChart.addMeasureAxis("x", "Worldwide Gross");
         myChart.addMeasureAxis("y", "Budget");
         myChart.addSeries("Opening Weekend", dimple.plot.bubble);
