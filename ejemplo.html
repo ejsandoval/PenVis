@@ -2,27 +2,24 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <div id="chartContainer">
+  <div id="secondChartContainer">
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="dist/dimple.v2.1.0.js"></script>
   <script type="text/javascript">
-  <div></div>
-    var svg = dimple.newSvg("#chartContainer", 590, 590);
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
     var dsv = d3.dsv(";", "text/plain");
-    //d3.csv("data/movies.csv", function (data)
     dsv("data/movies.csv", function (data) {
-        console.table(data);
-        var myChart = new dimple.chart(svg, data);
-        myChart.setBounds(60, 30, 500, 500)
-        myChart.addMeasureAxis("x", "Worldwide Gross");
-        myChart.addMeasureAxis("y", "Budget");
-        myChart.addMeasureAxis("z", "Opening Weekend");
-        myChart.addSeries("Film", dimple.plot.bubble);
-        //myChart.addLegend(200, 10, 360, 20);
-        myChart.draw();
-      });
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(20, 20, 460, 360)
+      myChart.addMeasureAxis("p", "Worldwide Gross");
+      var ring = myChart.addSeries("Film", dimple.plot.pie);
+      ring.innerRadius = "50%";
+      myChart.addLegend(500, 20, 90, 400, "left");
+      myChart.draw();
+    });
   </script>
 </div>
+
 <a href="http://ejsandoval.github.io/otroEjemplo.html"> Otro Ejemplo </a>
 </body>
 </html>
