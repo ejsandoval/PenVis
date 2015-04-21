@@ -28,11 +28,11 @@
     var dsv = d3.dsv(";", "text/plain");
     dsv("data/movies.csv", function (data) {
       var myChart = new dimple.chart(svg, data);
-      myChart.setBounds(20, 20, 460, 460)
+      myChart.setBounds(20, 20, 460, 360)
       myChart.addMeasureAxis("p", "Worldwide Gross");
       var ring = myChart.addSeries("Film", dimple.plot.pie);
       ring.innerRadius = "50%";
-      myChart.addLegend(500, 20, 90, 400, "left");
+      myChart.addLegend(500, 20, 90, 500, "left");
       myChart.draw();
     });
   </script>
