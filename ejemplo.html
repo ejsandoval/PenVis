@@ -1,17 +1,17 @@
-
-  <div id="secondChartContainer">
+<div id="secondChartContainer">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="dist/dimple.v2.1.0.js"></script>
   <script type="text/javascript">
-    var svg1 = dimple.newSvg("#chartContainer", 590, 400);
-    var dsv1 = d3.dsv(";", "text/plain");
-    dsv1("data/movies.csv", function (data) {
-      var myChart1 = new dimple.chart(svg1, data);
-      myChart1.setBounds(20, 20, 460, 360)
-      myChart1.addMeasureAxis("p", "Worldwide Gross");
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
+    var dsv = d3.dsv(";", "text/plain");
+    dsv("data/movies.csv", function (data) {
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(20, 20, 460, 360)
+      myChart.addMeasureAxis("p", "Worldwide Gross");
       var ring = myChart.addSeries("Film", dimple.plot.pie);
       ring.innerRadius = "50%";
-      myChart1.addLegend(500, 20, 90, 400, "left");
-      myChart1.draw();
+      myChart.addLegend(500, 20, 90, 400, "left");
+      myChart.draw();
     });
   </script>
 </div>
-
