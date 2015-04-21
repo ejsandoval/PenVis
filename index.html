@@ -10,7 +10,7 @@
     dsv("data/movies.csv", function (data) {
         console.table(data);
         var myChart = new dimple.chart(svg, data);
-        myChart.setBounds(60, 30, 500, 500)
+        myChart.setBounds(60, 30, 400, 400)
         myChart.addMeasureAxis("x", "Worldwide Gross");
         myChart.addMeasureAxis("y", "Budget");
         myChart.addMeasureAxis("z", "Opening Weekend");
