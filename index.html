@@ -28,7 +28,7 @@
     var dsv = d3.dsv(";", "text/plain");
     dsv("data/movies.csv", function (data) {
       var myChart = new dimple.chart(svg, data);
-      myChart.setBounds(20, 20, 460, 360)
+      myChart.setBounds(500, 500, 560, 460)
       myChart.addMeasureAxis("p", "Worldwide Gross");
       var ring = myChart.addSeries("Film", dimple.plot.pie);
       ring.innerRadius = "50%";
