@@ -13,18 +13,12 @@
       dsv("data/movies.csv", function (data) {
           console.table(data);
           var myChart = new dimple.chart(svg, data);
-          myChart.noFormats = true;
           myChart.setBounds(60, 30, 400, 400);
           myChart.addMeasureAxis("x", "Worldwide Gross");
           myChart.addMeasureAxis("y", "Budget");
           myChart.addMeasureAxis("z", "Opening Weekend");
           myChart.addSeries("Film", dimple.plot.bubble);
           myChart.draw();
-          myChart.defaultColors = [
-              new dimple.color("#FF0000", "Blue"), // Set a red fill with a blue stroke
-              new dimple.color("#00FF00"), // Set a green fill with a darker green stroke
-              new dimple.color("rgb(0, 0, 255)") // Set a blue fill with a darker blue stroke
-          ]; 
 
         });
     </script>
