@@ -6,18 +6,7 @@
   <div id="chartContainer2">
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="dist/dimple.v2.1.0.js"></script>
-    <script type="text/javascript">
-      var svg2 = dimple.newSvg("#chartContainer", 590, 400);
-      d3.tsv("data/example_data.tsv", function (data2) {
-        var myChart2 = new dimple.chart(svg2, data2);
-        myChart2.setBounds(20, 20, 460, 360)
-        myChart2.addMeasureAxis("p", "Unit Sales");
-        var ring = myChart2.addSeries("Owner", dimple.plot.pie);
-        ring.innerRadius = "50%";
-        myChart2.addLegend(500, 20, 90, 300, "left");
-        myChart2.draw();
-      });
-    </script>
+    
   </div>
 </body>
 </html>
