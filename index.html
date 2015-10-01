@@ -2,6 +2,7 @@
   <link href="style.css" rel="stylesheet" />
 </head>
 <body>
+  <a href="ringChart.html">Ring Chart</a>
   <div id="chartContainer">
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="dist/dimple.v2.1.0.js"></script>
@@ -17,13 +18,13 @@
           myChart.addMeasureAxis("x", "Worldwide Gross");
           myChart.addMeasureAxis("y", "Budget");
           myChart.addMeasureAxis("z", "Opening Weekend");
+          myChart.addSeries("Film", dimple.plot.bubble);
+          myChart.draw();
           myChart.defaultColors = [
               new dimple.color("#FF0000", "Blue"), // Set a red fill with a blue stroke
               new dimple.color("#00FF00"), // Set a green fill with a darker green stroke
               new dimple.color("rgb(0, 0, 255)") // Set a blue fill with a darker blue stroke
           ]; 
-          myChart.addSeries("Film", dimple.plot.bubble);
-          myChart.draw();
 
         });
     </script>
