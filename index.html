@@ -1,0 +1,26 @@
+<html>
+<head>
+	<link href="style.css" rel="stylesheet"/>
+	<link href="/js/dimple.v2.1.0.min.js" rel="text/javascript"/>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+	<div id="chartContainer">
+		  <script type="text/javascript">
+		    var svg = dimple.newSvg("#chartContainer", 600, 500);
+		    var dsv = d3.dsv(";", "text/plain");
+		    dsv("data/movies.csv", function (data) {
+	          console.table(data);
+	          var myChart = new dimple.chart(svg, data);
+	          myChart.setBounds(60, 30, 400, 400);
+	          myChart.addMeasureAxis("x", "Worldwide Gross");
+	          myChart.addMeasureAxis("y", "Budget");
+	          myChart.addMeasureAxis("z", "Opening Weekend");
+	          myChart.addSeries("Film", dimple.plot.bubble);
+	          myChart.draw();
+        });
+    	</script>
+	</div>
+
+</body>
+</html>
