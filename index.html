@@ -25,8 +25,8 @@
 
     <script type="text/javascript">
       var svg2 = dimple.newSvg("#chartContainer", 590, 400);
-      d3.tsv("data/example_data.tsv", function (data2) {
-        var myChart2 = new dimple.chart(svg2, data2);
+      d3.tsv("data/example_data.tsv", function (data) {
+        var myChart2 = new dimple.chart(svg2, data);
         myChart2.setBounds(20, 20, 460, 360)
         myChart2.addMeasureAxis("p", "Unit Sales");
         var ring = myChart2.addSeries("Owner", dimple.plot.pie);
