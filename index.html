@@ -6,21 +6,24 @@
 </head>
 <body>
 	<div id="chartContainer">
-		  <script type="text/javascript">
-		    var svg = dimple.newSvg("#chartContainer", 600, 500);
-		    var dsv = d3.dsv(";", "text/plain");
-		    dsv("data/movies.csv", function (data) {
-	          console.table(data);
-	          var myChart = new dimple.chart(svg, data);
-	          myChart.setBounds(60, 30, 400, 400);
-	          myChart.addMeasureAxis("x", "Worldwide Gross");
-	          myChart.addMeasureAxis("y", "Budget");
-	          myChart.addMeasureAxis("z", "Opening Weekend");
-	          myChart.addSeries("Film", dimple.plot.bubble);
-	          myChart.draw();
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="dist/dimple.v2.1.0.js"></script>
+    <script type="text/javascript">
+      var svg = dimple.newSvg("#chartContainer", 590, 590);
+      var dsv = d3.dsv(";", "text/plain");
+      //d3.csv("data/movies.csv", function (data)
+      dsv("data/movies.csv", function (data) {
+          console.table(data);
+          var myChart = new dimple.chart(svg, data);
+          myChart.setBounds(60, 30, 400, 400);
+          myChart.addMeasureAxis("x", "Worldwide Gross");
+          myChart.addMeasureAxis("y", "Budget");
+          myChart.addMeasureAxis("z", "Opening Weekend");
+          myChart.addSeries("Film", dimple.plot.bubble);
+          myChart.draw();
+
         });
-    	</script>
-	</div>
+    </script>
 
 </body>
 </html>
