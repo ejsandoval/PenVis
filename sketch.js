@@ -219,6 +219,18 @@ function mouseMoved(){
   }*/
 }
 
+function keyPressed() {
+  if (keyCode === ENTER ){
+    middleColor = color(101,113,125);
+    forest.snowMode();
+  }
+  else if (keyCode === BACKSPACE ){
+    middleColor = backColor;
+    forest.normalMode();
+  }
+  
+}
+
 function calculateLerpColor(from, to, range){
   return lerpColor(from, to, range);
 }
@@ -273,6 +285,24 @@ function Forest() {
       bush.move(direction);
     });
   }
+  
+  this.snowMode = function(){
+    this.trees.forEach(function(tree){
+      tree.changeColors(40,54,60);
+    });
+    this.bushes.forEach(function(bush){
+      bush.changeColors(209,234,243);
+    });
+  }
+  
+  this.normalMode = function(){
+    this.trees.forEach(function(tree){
+      tree.changeColors(64,57,43);
+    });
+    this.bushes.forEach(function(bush){
+      bush.changeColors(62,68,29);
+    });
+  }
 }
 
 /***** Clase Arbusto *******/
@@ -280,7 +310,8 @@ function Forest() {
 function Bush() {
   this.baseX = random(-100, width + 100);
   this.baseY = height+5;
-  this.randomAlpha = random(0,0.9);
+  this.randomAlpha = random(0,200);
+  this.bushColor = [62,68,29];
   this.trianglesVertices = new Array();
   
   this.display = function(){
@@ -298,33 +329,37 @@ function Bush() {
   }
   
   this.drawTriangles = function(){
+    fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
+    noStroke();
     this.trianglesVertices.forEach(function(vertices){
-      fill(62,68,29,this.randomAlpha);
-      noStroke();
       triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
     });
   }
   
   this.move = function(direction){
     if (direction == "up"){
+      this.randomAlpha += 5;
+      fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
+      noStroke();
       this.trianglesVertices.forEach(function(vertices){
-        this.randomAlpha += 0.08;
-        fill(62,68,29,this.randomAlpha);
-        noStroke();
         triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
       });
      }
      if (direction == "down"){
-       this.trianglesVertices.forEach(function(vertices){
-        this.randomAlpha -= 0.08;
-        fill(62,68,29,this.randomAlpha);
-        noStroke();
+      this.randomAlpha -= 5;
+      fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
+      noStroke();
+      this.trianglesVertices.forEach(function(vertices){
         triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
       });
      }
   }
-}
 
+  this.changeColors = function(r,g,b){
+    this.bushColor = [r,g,b];
+  }
+}
+  
 
 /***** Clase Árbol *******/
 
@@ -332,8 +367,11 @@ function Tree() {
   this.baseX = random(-300, width + 300);
   this.baseY = height;
   this.base = [this.baseX, this.baseY];
-  randomAlpha = random(20,255);
-  this.treeColor = color(64,57,43,randomAlpha);
+  this.randomAlpha = random(20,255);
+  this.r = 64;
+  this.g = 57
+  this.b = 43;
+  this.treeColor = color(this.r,this.g, this.b, this.randomAlpha);
   this.actualStrokeWidth = 20;
   this.vertices = new Array();
   this.vertices.push(this.base);
@@ -388,6 +426,10 @@ function Tree() {
         }
       }
      }
+  }
+  
+  this.changeColors = function(r,g,b){
+    this.treeColor = color(r, g, b, this.randomAlpha);
   }
   
   function calculateVertex(position){
