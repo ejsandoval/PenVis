@@ -220,11 +220,11 @@ function mouseMoved(){
 }
 
 function keyPressed() {
-  if (keyCode === ENTER ){
+  if (keyCode === LEFT_ARRROW ){
     middleColor = color(101,113,125);
     forest.snowMode();
   }
-  else if (keyCode === BACKSPACE ){
+  else if (keyCode === RIGHT_ARROW ){
     middleColor = backColor;
     forest.normalMode();
   }
