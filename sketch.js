@@ -220,7 +220,7 @@ function mouseMoved(){
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARRROW ){
+  if (keyCode === LEFT_ARROW ){
     middleColor = color(101,113,125);
     forest.snowMode();
   }
