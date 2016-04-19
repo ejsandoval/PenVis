@@ -1,10 +1,14 @@
+var pdf;
 var backColor;
 var sideColor;
 var treeBaseColor;
 var middleColor;
 
 function setup() {
-  createCanvas(600,600);
+  //createCanvas(600,600);
+  createCanvas(600,600,SVG);
+  pdf = createPDF();
+  pdf.beginRecord();
   backColor = color(30,34,13);
   sideColor = color(44,49,20);
   treeBaseColor = color(106,81,65);
@@ -12,6 +16,7 @@ function setup() {
   forest.display();
   middleColor = backColor;
   background(backColor);
+  
 }
 
 function draw() {
@@ -19,6 +24,9 @@ function draw() {
   forest.drawTrees();
   drawDeer();
   forest.drawBushes();
+  if (mouseIsPressed) {
+        pdf.save();
+    }
 }
 
 function drawDeer(){
@@ -205,18 +213,12 @@ function mouseMoved(){
   if (mouseX < pmouseX) {
     forest.move("left");
   }
-  if (mouseY < pmouseY) {
+  if (mouseY > pmouseY) {
     forest.move("down");
   }
-  if (mouseY > pmouseY) {
+  if (mouseY < pmouseY) {
     forest.move("up");
-  }/*
-  if(mouseX <= width/2){
-    //middleColor = calculateLerpColor(sideColor, backColor, map(mouseX, 0, width/2, 0, 1));
   }
-  else{
-    //middleColor = calculateLerpColor(backColor, sideColor, map(mouseX, width/2, width, 0, 1));
-  }*/
 }
 
 function keyPressed() {
@@ -231,15 +233,12 @@ function keyPressed() {
   
 }
 
-function calculateLerpColor(from, to, range){
-  return lerpColor(from, to, range);
-}
 
 /***** Clase Bosque: Contiene árboles y arbustos *******/
 
 function Forest() {
   this.numOfTrees = 40;
-  this.numOfBushes = 20;
+  this.numOfBushes = 25;
   this.trees = new Array();
   this.bushes = new Array();
   
@@ -280,6 +279,7 @@ function Forest() {
   this.move = function(direction){
     this.trees.forEach(function(tree){
       tree.move(direction);
+      tree.move(direction);
     });
     this.bushes.forEach(function(bush){
       bush.move(direction);
@@ -304,62 +304,6 @@ function Forest() {
     });
   }
 }
-
-/***** Clase Arbusto *******/
-
-function Bush() {
-  this.baseX = random(-100, width + 100);
-  this.baseY = height+5;
-  this.randomAlpha = random(0,200);
-  this.bushColor = [62,68,29];
-  this.trianglesVertices = new Array();
-  
-  this.display = function(){
-    for (i = 0; i < 7; i++){
-      this.trianglesVertices.push(generateVertices([this.baseX,this.baseY]));
-    }
-  }
-  
-  generateVertices = function(position){
-    var x2 = position[0] + random(-200,200);
-    var y2 = constrain(position[1] + random(-200,0),420,height+10);
-    var x3 = x2 + random(-50,50);
-    var y3 = constrain(y2 + random(-100,0),450,height);
-    return [position[0], position[1], x2, y2, x3, y3];
-  }
-  
-  this.drawTriangles = function(){
-    fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
-    noStroke();
-    this.trianglesVertices.forEach(function(vertices){
-      triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
-    });
-  }
-  
-  this.move = function(direction){
-    if (direction == "up"){
-      this.randomAlpha += 5;
-      fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
-      noStroke();
-      this.trianglesVertices.forEach(function(vertices){
-        triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
-      });
-     }
-     if (direction == "down"){
-      this.randomAlpha -= 5;
-      fill(this.bushColor[0],this.bushColor[1],this.bushColor[2],this.randomAlpha);
-      noStroke();
-      this.trianglesVertices.forEach(function(vertices){
-        triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
-      });
-     }
-  }
-
-  this.changeColors = function(r,g,b){
-    this.bushColor = [r,g,b];
-  }
-}
-  
 
 /***** Clase Árbol *******/
 
@@ -402,34 +346,30 @@ function Tree() {
   this.move = function(direction){
      if (direction == "left"){
       for(i = 0; i < this.vertices.length; i++){
-        this.vertices[i][0] -= 3;
+        this.vertices[i][0] -= 4;
       }
      }
      else if (direction == "right"){
       for(i = 0; i < this.vertices.length; i++){
-        this.vertices[i][0] += 3;
+        this.vertices[i][0] += 4;
       }
      }
      else if (direction == "up"){
       for(i = 0; i < this.vertices.length; i++){
         if(this.vertices[i][1] != this.vertices[0][1]){
           this.actualStrokeWidth -= 0.04;
-          this.vertices[i][1] += 3;
+          this.vertices[i][1] += 4;
         }
       }
      }
      else if (direction == "down"){
        for(i = 0; i < this.vertices.length; i++){
         if(this.vertices[i][1] != this.vertices[0][1]){
-          this.vertices[i][1] -= 3;
+          this.vertices[i][1] -= 4;
           this.actualStrokeWidth += 0.04;
         }
       }
      }
-  }
-  
-  this.changeColors = function(r,g,b){
-    this.treeColor = color(r, g, b, this.randomAlpha);
   }
   
   function calculateVertex(position){
@@ -438,4 +378,67 @@ function Tree() {
     return([newPosX, newPosY]);
   }
   
+  this.changeColors = function(r,g,b){
+    this.treeColor = color(r, g, b, this.randomAlpha);
+  }
+  
 }
+
+/***** Clase Arbusto *******/
+
+function Bush() {
+  this.baseX = random(-100, width + 100);
+  this.baseY = height+5;
+  this.randomAlpha = random(0,200);
+  this.bushColor = [62,68,29];
+  this.trianglesVertices = new Array();
+  
+  this.display = function(){
+    for (i = 0; i < 7; i++){
+      this.trianglesVertices.push(generateVertices([this.baseX,this.baseY]));
+    }
+  }
+  
+  generateVertices = function(position){
+    var x2 = position[0] + random(-200,200);
+    var y2 = constrain(position[1] + random(-200,0),420,height+10);
+    var x3 = x2 + random(-50,50);
+    var y3 = constrain(y2 + random(-100,0),450,height);
+    return [position[0], position[1], x2, y2, x3, y3];
+  }
+  
+  this.drawTriangles = function(){
+    var bushColor = this.bushColor;
+    fill(bushColor[0],bushColor[1],bushColor[2],this.randomAlpha);
+    noStroke();
+    this.trianglesVertices.forEach(function(vertices){
+      triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
+    });
+  }
+  
+  this.move = function(direction){
+    if (direction == "up"){
+      var bushColor = this.bushColor;
+      this.randomAlpha = constrain(this.randomAlpha - 4, 0, 150);
+      fill(bushColor[0],bushColor[1],bushColor[2],this.randomAlpha);
+      noStroke();
+      this.trianglesVertices.forEach(function(vertices){
+        triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
+      });
+     }
+     if (direction == "down" && mouseY > 300){
+      var bushColor = this.bushColor;
+      this.randomAlpha = constrain(this.randomAlpha + 4, 0, 150);
+      fill(bushColor[0],bushColor[1],bushColor[2],this.randomAlpha);
+      noStroke();
+      this.trianglesVertices.forEach(function(vertices){
+        triangle(vertices[0],vertices[1],vertices[2],vertices[3],vertices[4],vertices[5]);
+      });
+     }
+  }
+  
+  this.changeColors = function(r,g,b){
+    this.bushColor = [r,g,b];
+  }
+}
+
