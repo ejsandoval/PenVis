@@ -61,3 +61,16 @@ p {
   font-size: 12px;
   text-align: center;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+ul li {
+  display: inline-block;
+}
