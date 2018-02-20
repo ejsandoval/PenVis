@@ -73,9 +73,12 @@ a:hover {
   color: black;
 }
 
+ul {
+  text-align: center;
+}
+
 ul li {
   display: inline-block;
-  text-align: center;
   padding: 0 10px;
 }
 
