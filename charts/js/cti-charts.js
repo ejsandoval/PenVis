@@ -215,7 +215,7 @@ d3.json("data/contexto-general/cti/CTI-RazonesparatrabajarenCTI.json", function(
         .render();
       }
 
-d3.json("data/contexto-general/cti/CTI-BeneficiosdelaCTI.json", function(error, loaded_data) {
+d3.json("data/contexto-general/cti/CTI-RiesgosdelaCTI.json", function(error, loaded_data) {
         if (error) return console.error(error);
         makeViz6(loaded_data,"#viz_6");
       });
