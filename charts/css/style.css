@@ -75,9 +75,9 @@ a:hover {
 
 ul li {
   display: inline-block;
+  text-align: center;
 }
 
 nav {
   margin: 0 auto;
-  text-align: center;
 }
