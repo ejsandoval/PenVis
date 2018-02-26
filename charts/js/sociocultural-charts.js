@@ -358,7 +358,7 @@ d3.json("data/contexto-general/socio-cultural/ConfianzaInterpersonal-Confianzaen
         .render();
       }
 
-d3.json("data/contexto-general/socio-cultural/ConfianzaInterpersonal-Confianzaenlosdemas2.json", function(error, loaded_data) {
+d3.json("data/contexto-general/socio-cultural/ConfianzaInterpersonal-ConfianzaenlosdemasPregunta 3.json", function(error, loaded_data) {
         if (error) return console.error(error);
         makeViz10(loaded_data,"#viz_10");
       });

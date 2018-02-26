@@ -61,27 +61,3 @@ p {
   font-size: 12px;
   text-align: center;
 }
-
-a {
-  text-decoration: none;
-  font-family: sourceBold;
-  color: gray;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: black;
-}
-
-ul {
-  text-align: center;
-}
-
-ul li {
-  display: inline-block;
-  padding: 0 10px;
-}
-
-nav {
-  margin: 0 auto;
-}
