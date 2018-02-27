@@ -242,3 +242,79 @@ d3.json("data/contexto-general/cti/CTI-BeneficiosdelaCTI.json", function(error, 
         .groupBy("opinion")
         .render();
       }
+
+d3.json("data/contexto-general/cti/CTI-motivacionparaemprender.json", function(error, loaded_data) {
+        if (error) return console.error(error);
+        makeViz7(loaded_data,"#viz_7");
+      });
+
+      function makeViz7(data,container){
+        var vis7 = new d3plus.BarChart()
+        .data(data)
+        .tooltipConfig({
+          body: function(d) {
+            var table = "<table class='tooltip-table'>";
+            table += "<tr><td class='title'>Año:</td><td class='data'>" + d.year + "</td></tr>";
+            table += "<tr><td class='title'>Porcentaje:</td><td class='data'>" + d.value + "%</td></tr>";
+            table += "</table>";
+            return table;
+          },
+          footer: function(d) {
+            return "<sub class='tooltip-footer'></sub>";
+          },
+          title: function(d) {
+            var txt = d.idea;
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+          }
+        })
+        .select(container)
+        .x("year")
+        .xConfig({
+          title:"Año"
+        })
+        .y("value")
+        .yConfig({
+          title:"Porcentaje (%)"
+        })
+        .groupBy("idea")
+        .groupPadding(20)
+        .render();
+      }
+
+d3.json("data/contexto-general/cti/CTI-atributospersonales.json", function(error, loaded_data) {
+        if (error) return console.error(error);
+        makeViz8(loaded_data,"#viz_8");
+      });
+
+      function makeViz8(data,container){
+        var vis8 = new d3plus.BarChart()
+        .data(data)
+        .tooltipConfig({
+          body: function(d) {
+            var table = "<table class='tooltip-table'>";
+            table += "<tr><td class='title'>Año:</td><td class='data'>" + d.year + "</td></tr>";
+            table += "<tr><td class='title'>Porcentaje:</td><td class='data'>" + d.value + "%</td></tr>";
+            table += "</table>";
+            return table;
+          },
+          footer: function(d) {
+            return "<sub class='tooltip-footer'></sub>";
+          },
+          title: function(d) {
+            var txt = d.idea;
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+          }
+        })
+        .select(container)
+        .x("year")
+        .xConfig({
+          title:"Año"
+        })
+        .y("value")
+        .yConfig({
+          title:"Porcentaje (%)"
+        })
+        .groupPadding(20)
+        .groupBy("idea")
+        .render();
+      }

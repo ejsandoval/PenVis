@@ -61,3 +61,27 @@ p {
   font-size: 12px;
   text-align: center;
 }
+
+nav li {
+  display: inline-block;
+  margin: 0 2%;
+}
+
+nav li a{
+  font-family: source;
+  text-decoration: none;
+  color: gray;
+}
+
+nav li a:hover{
+  font-family: source;
+  color: black;
+}
+
+nav ul {
+  text-align: center;
+}
+
+nav {
+  margin-top: 2%;
+}

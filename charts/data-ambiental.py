@@ -72,14 +72,12 @@ for fileName in fileNames:
                             country = col
                         else:
                             datum["country"] = country
-                            datum["year"] = header[colnum]
-                            s = col.encode('utf8')
-                            print(s)
+                            datum["year"] = int(header[colnum])
                             if col == "..." or col == "":
                                 datum["value"]= None
                             else:
                                 datum["value"]= float(col.strip())
-                            data.append(datum)
+                                data.append(datum)
                         colnum += 1
                 rownum += 1
             with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
@@ -102,14 +100,12 @@ for fileName in fileNames:
                             country = col
                         else:
                             datum["country"] = country
-                            datum["year"] = header[colnum]
-                            s = col.encode('utf8')
-                            print(s)
+                            datum["year"] = int(header[colnum])
                             if col == "..." or col == "":
                                 datum["value"]= None
                             else:
                                 datum["value"]= float(col.strip())
-                            data.append(datum)
+                                data.append(datum)
                         colnum += 1
                 rownum += 1
             with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
@@ -133,8 +129,6 @@ for fileName in fileNames:
                         else:
                             datum["activity"] = activity
                             datum["year"] = header[colnum]
-                            s = col.encode('utf8')
-                            print(s)
                             if col == "":
                                 datum["value"]= None
                             else:
@@ -148,7 +142,10 @@ for fileName in fileNames:
     if fileName == "Principalesproblemasambiental":
         with open(path+"-"+fileName+'.csv', newline='', encoding="utf-8") as csvfile:
             reader = csv.reader(csvfile)
-            data = []
+            data1 = []
+            year1 = ""
+            data2 = []
+            year2 = ""
             rownum = 0
             for row in reader:
                 if rownum == 0:
@@ -160,20 +157,31 @@ for fileName in fileNames:
                         datum = {}
                         if header[colnum] in header[0]:
                             problem = col
-                        else:
+                        elif header[colnum] in header[1]:
                             datum["problem"] = problem
-                            datum["year"] = header[colnum]
-                            s = col.encode('utf8')
-                            print(s)
+                            aux = header[colnum].split(" ")
+                            year1 = aux[len(aux)-1]
                             if col == "" or col == "--":
                                 datum["value"]= None
                             else:
                                 datum["value"]= float(col.strip())
-                            data.append(datum)
+                            data1.append(datum)
+                        else:
+                            aux = header[colnum].split(" ")
+                            year2 = aux[len(aux)-1]
+                            datum["problem"] = problem
+                            datum["year"] = header[colnum]
+                            if col == "" or col == "--":
+                                datum["value"]= None
+                            else:
+                                datum["value"]= float(col.strip())
+                            data2.append(datum)
                         colnum += 1
                 rownum += 1
-            with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False)
+            with open(path+"-"+fileName+year1+'.json', 'w', encoding="utf-8") as f:
+                json.dump(data1, f, ensure_ascii=False)
+            with open(path+"-"+fileName+year2+'.json', 'w', encoding="utf-8") as f:
+                json.dump(data2, f, ensure_ascii=False)
 
     if fileName == "Respaldodemedidas":
         with open(path+"-"+fileName+'.csv', newline='', encoding="utf-8") as csvfile:
@@ -193,8 +201,6 @@ for fileName in fileNames:
                         else:
                             datum["idea"] = idea
                             datum["opinion"] = header[colnum]
-                            s = col.encode('utf8')
-                            print(s)
                             if col == "" or col == "--":
                                 datum["value"]= None
                             else:
@@ -205,3 +211,51 @@ for fileName in fileNames:
             with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False)
 
+    if fileName == "nivelderesponsabilidadcambioclimatico":
+        with open(path+"-"+fileName+'.csv', newline='', encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            data = []
+            rownum = 0
+            for row in reader:
+                if rownum == 0:
+                    header = row
+                else:
+                    colnum = 0
+                    idea = ""
+                    for col in row:
+                        datum = {}
+                        if header[colnum] in header[0]:
+                            group = col
+                        else:
+                            datum["group"] = group
+                            datum["value"]= float(col.strip())
+                            data.append(datum)
+                        colnum += 1
+                rownum += 1
+            with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False)
+
+
+    if fileName == "nivelderesponsabilidadsolucioncambioclimatico":
+        with open(path+"-"+fileName+'.csv', newline='', encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile)
+            data = []
+            rownum = 0
+            for row in reader:
+                if rownum == 0:
+                    header = row
+                else:
+                    colnum = 0
+                    idea = ""
+                    for col in row:
+                        datum = {}
+                        if header[colnum] in header[0]:
+                            group = col
+                        else:
+                            datum["group"] = group
+                            datum["value"]= float(col.strip())
+                            data.append(datum)
+                        colnum += 1
+                rownum += 1
+            with open(path+"-"+fileName+'.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False)

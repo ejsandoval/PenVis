@@ -31,38 +31,6 @@ d3.json("data/contexto-general/socio-cultural/ClimaSocial-Percepciondeconflictos
         .render();
       }
 
-      // function makeViz(data,container){
-      //   var vis = new d3plus.BarChart()
-      //   .data(data)
-      //   .tooltipConfig({
-      //     body: function(d) {
-      //       var table = "<table class='tooltip-table'>";;
-      //       table += "<tr><td class='title'>Porcentaje:</td><td class='data'>" + d.opinion + "</td></tr>";
-      //       table += "<tr><td class='title'>Porcentaje:</td><td class='data'>" + d.value + "%</td></tr>";
-      //       table += "</table>";
-      //       return table;
-      //     },
-      //     footer: function(d) {
-      //       return "<sub class='tooltip-footer'></sub>";
-      //     },
-      //     title: function(d) {
-      //       var txt = d.activity;
-      //       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
-      //     }
-      //   })
-      //   .select(container)
-      //   .y("value")
-      //   .yConfig({
-      //     title:"Porcentaje(%)"
-      //   })
-      //   .x("year")
-      //   .xConfig({
-      //     title:"Año"
-      //   })
-      //   .groupBy("conflict")
-      //   .render();
-      // }
-
 d3.json("data/contexto-general/socio-cultural/ClimaSocial-Resoluciondeconflictos.json", function(error, loaded_data) {
         if (error) return console.error(error);
         makeViz1(loaded_data,"#viz_1");
@@ -203,7 +171,7 @@ d3.json("data/contexto-general/socio-cultural/ClimaSocial-Satisfaccionpropiavsot
         .render();
       }
 
-d3.json("data/contexto-general/socio-cultural/Confianzaenlasinstituciones-Confianzaenlasinstituciones2.json", function(error, loaded_data) {
+d3.json("data/contexto-general/socio-cultural/Confianzaenlasinstituciones-Confianzaenlasinstituciones.json", function(error, loaded_data) {
         if (error) return console.error(error);
         makeViz5(loaded_data,"#viz_5");
       });
